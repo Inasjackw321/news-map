@@ -1,6 +1,10 @@
 # News Map
 
+[![Deploy to GitHub Pages](https://github.com/Inasjackw321/news-map/actions/workflows/deploy.yml/badge.svg)](https://github.com/Inasjackw321/news-map/actions/workflows/deploy.yml)
+
 An interactive real-time news mapping application where users can log in with Google and place markers for news events around the world, similar to LiveUAMap.
+
+**Live Demo**: [https://Inasjackw321.github.io/news-map](https://Inasjackw321.github.io/news-map)
 
 ## Features
 
@@ -201,6 +205,44 @@ When enabled, the map automatically listens for new markers added by any user in
 Markers created within the last 24 hours appear larger and with a bouncing animation to draw attention.
 
 ## Deployment
+
+### Deploy to GitHub Pages (Automatic)
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+#### Setup GitHub Pages
+
+1. Go to your repository on GitHub
+2. Navigate to Settings > Pages
+3. Under "Build and deployment":
+   - Source: Select "GitHub Actions"
+4. The site will automatically deploy when you push to the `main` branch
+
+#### First-time Setup
+
+1. Make sure all your changes are committed
+2. Merge your feature branch to `main`:
+```bash
+git checkout main
+git merge claude/google-login-map-011CV1UHN6mcGsyxKAnadeSk
+git push origin main
+```
+
+3. GitHub Actions will automatically build and deploy
+4. Your site will be available at: `https://Inasjackw321.github.io/news-map`
+
+#### Important Notes
+
+- The app is configured with base path `/news-map/` for GitHub Pages
+- Make sure to add your Firebase config to GitHub Secrets if needed (for production)
+- The `.nojekyll` file ensures proper deployment
+- Deployment typically takes 2-3 minutes
+
+#### Viewing Deployment Status
+
+- Go to the "Actions" tab in your GitHub repository
+- Click on the latest workflow run to see deployment progress
+- Once complete, visit your GitHub Pages URL
 
 ### Deploy to Firebase Hosting
 

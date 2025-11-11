@@ -2,6 +2,7 @@
   "name": "news-map",
   "version": "1.0.0",
   "description": "Interactive news map with Google authentication and real-time markers",
+  "homepage": "https://Inasjackw321.github.io/news-map",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -11,12 +11,25 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
+// Check if Firebase is configured
+export const isFirebaseConfigured = firebaseConfig.apiKey && firebaseConfig.projectId
 
-// Initialize services
-export const auth = getAuth(app)
-export const googleProvider = new GoogleAuthProvider()
-export const db = getFirestore(app)
+let app = null
+let auth = null
+let googleProvider = null
+let db = null
 
+// Only initialize Firebase if configured
+if (isFirebaseConfigured) {
+  try {
+    app = initializeApp(firebaseConfig)
+    auth = getAuth(app)
+    googleProvider = new GoogleAuthProvider()
+    db = getFirestore(app)
+  } catch (error) {
+    console.error('Firebase initialization error:', error)
+  }
+}
+
+export { auth, googleProvider, db }
 export default app

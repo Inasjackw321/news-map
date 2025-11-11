@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
-import { db } from '../firebase'
+import { db, isFirebaseConfigured } from '../firebase'
 import { collection, onSnapshot, query, orderBy, limit } from 'firebase/firestore'
 import L from 'leaflet'
 import '../styles/Map.css'
@@ -52,7 +52,7 @@ function Map({ user, onMapClick, autoMode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!autoMode) {
+    if (!autoMode || !db) {
       setLoading(false)
       return
     }
@@ -100,6 +100,12 @@ function Map({ user, onMapClick, autoMode }) {
 
   return (
     <div className="map-container">
+      {!isFirebaseConfigured && (
+        <div className="firebase-warning">
+          ⚠️ Firebase not configured. Map is in view-only mode. See README for setup instructions.
+        </div>
+      )}
+
       {loading && (
         <div className="map-loading">
           <div className="loading-spinner"></div>

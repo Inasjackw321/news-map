@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { auth, googleProvider } from './firebase'
+import { auth, googleProvider, isFirebaseConfigured } from './firebase'
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth'
 import Map from './components/Map'
 import AuthPanel from './components/AuthPanel'
@@ -14,6 +14,11 @@ function App() {
   const [autoMode, setAutoMode] = useState(true)
 
   useEffect(() => {
+    if (!auth) {
+      setLoading(false)
+      return
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       setLoading(false)
@@ -23,6 +28,10 @@ function App() {
   }, [])
 
   const handleLogin = async () => {
+    if (!isFirebaseConfigured) {
+      alert('Firebase is not configured. Please set up your Firebase credentials in .env file.')
+      return
+    }
     try {
       await signInWithPopup(auth, googleProvider)
     } catch (error) {
@@ -32,6 +41,7 @@ function App() {
   }
 
   const handleLogout = async () => {
+    if (!auth) return
     try {
       await signOut(auth)
     } catch (error) {
@@ -40,6 +50,10 @@ function App() {
   }
 
   const handleMapClick = (position) => {
+    if (!isFirebaseConfigured) {
+      alert('Firebase is not configured. The map is in view-only mode. Set up Firebase to add markers.')
+      return
+    }
     if (!user) {
       alert('Please log in to place markers')
       return

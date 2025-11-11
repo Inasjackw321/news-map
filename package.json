@@ -1,0 +1,22 @@
+{
+  "name": "news-map",
+  "version": "1.0.0",
+  "description": "Interactive news map with Google authentication and real-time markers",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "firebase": "^10.13.0",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}

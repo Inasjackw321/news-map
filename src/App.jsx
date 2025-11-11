@@ -7,6 +7,9 @@ import MarkerForm from './components/MarkerForm'
 import './styles/App.css'
 
 function App() {
+  console.log('App component rendering')
+  console.log('Firebase configured:', isFirebaseConfigured)
+
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showMarkerForm, setShowMarkerForm] = useState(false)
@@ -14,12 +17,15 @@ function App() {
   const [autoMode, setAutoMode] = useState(true)
 
   useEffect(() => {
+    console.log('App useEffect running, auth:', auth)
     if (!auth) {
+      console.log('No auth, setting loading to false')
       setLoading(false)
       return
     }
 
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log('Auth state changed, user:', currentUser)
       setUser(currentUser)
       setLoading(false)
     })
